@@ -36,13 +36,13 @@
           editorconfig.enable = mkEnableDefaultsOption "EditorConfig";
           github.enable = mkEnableDefaultsOption "GitHub";
           haskell.enable = mkEnableDefaultsOption "Haskell";
-          latex.enable = mkEnableDefaultsOption "LaTeX";
           lua.enable = mkEnableDefaultsOption "Lua";
           markdown.enable = mkEnableDefaultsOption "Markdown";
           nix.enable = mkEnableDefaultsOption "Nix" // {
             default = true;
           };
           sops.enable = mkEnableDefaultsOption "SOPS";
+          tex.enable = mkEnableDefaultsOption "TeX";
           toml.enable = mkEnableDefaultsOption "TOML";
           yaml.enable = mkEnableDefaultsOption "YAML";
         };
@@ -148,6 +148,11 @@
             '';
             tools.yaml.enable = true; # for `.sops.yaml`
           };
+        })
+
+        (lib.mkIf config.defaults.tools.tex.enable {
+          pre-commit.settings.hooks.chktex.enable = true;
+          treefmt.programs.latexindent.enable = true;
         })
 
         (lib.mkIf config.defaults.tools.toml.enable {
