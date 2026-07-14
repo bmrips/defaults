@@ -152,6 +152,7 @@
 
         (lib.mkIf config.defaults.tools.toml.enable {
           pre-commit.settings.hooks.check-toml.enable = true;
+          treefmt.programs.taplo.enable = true;
         })
 
         (lib.mkIf config.defaults.tools.yaml.enable {
