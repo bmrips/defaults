@@ -100,6 +100,10 @@
           treefmt.programs.shfmt.enable = true;
         })
 
+        (lib.mkIf config.defaults.tools.editorconfig.enable {
+          pre-commit.settings.hooks.editorconfig-checker.enable = true;
+        })
+
         (lib.mkIf config.defaults.tools.github.enable {
           defaults.tools.yaml.enable = true; # for `.github/`
           pre-commit.settings.hooks.actionlint.enable = true;
