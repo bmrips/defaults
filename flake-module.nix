@@ -1,14 +1,26 @@
+inputs:
+
 {
   lib,
   flake-parts-lib,
   ...
 }:
 
+let
+  collectModules =
+    path:
+    lib.collect builtins.isPath (
+      inputs.haumea.lib.load {
+        src = path;
+        loader = inputs.haumea.lib.loaders.path;
+      }
+    );
+in
 {
   options.perSystem = flake-parts-lib.mkPerSystemOption (
     { config, pkgs, ... }:
     {
-      imports = import ./modules;
+      imports = collectModules ./modules;
 
       options.defaults = {
         devShell = lib.mkOption {

@@ -3,6 +3,7 @@
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
+    haumea.url = "github:nix-community/haumea/v0.2.2";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     pre-commit.url = "github:cachix/git-hooks.nix";
     pre-commit.inputs.nixpkgs.follows = "nixpkgs";
@@ -14,7 +15,7 @@
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       let
-        flakeModule = import ./flake-module.nix;
+        flakeModule = import ./flake-module.nix inputs;
       in
       {
         imports = [
