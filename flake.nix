@@ -13,22 +13,20 @@
 
   outputs =
     inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
-      let
-        flakeModule = import ./flake-module.nix inputs;
-      in
-      {
-        imports = [ flakeModule ];
+    let
+      flakeModule = import ./flake-module.nix inputs;
+    in
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ flakeModule ];
 
-        systems = inputs.nixpkgs.lib.systems.flakeExposed;
+      systems = inputs.nixpkgs.lib.systems.flakeExposed;
 
-        flake.flakeModule = flakeModule;
+      flake.flakeModule = flakeModule;
 
-        perSystem =
-          { config, ... }:
-          {
-            devShells.default = config.defaults.devShell;
-          };
-      }
-    );
+      perSystem =
+        { config, ... }:
+        {
+          devShells.default = config.defaults.devShell;
+        };
+    };
 }
