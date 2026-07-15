@@ -18,11 +18,7 @@
         flakeModule = import ./flake-module.nix inputs;
       in
       {
-        imports = [
-          inputs.pre-commit.flakeModule
-          inputs.treefmt.flakeModule
-          flakeModule
-        ];
+        imports = [ flakeModule ];
 
         systems = inputs.nixpkgs.lib.systems.flakeExposed;
 

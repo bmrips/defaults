@@ -17,6 +17,11 @@ let
     );
 in
 {
+  imports = [
+    inputs.pre-commit.flakeModule
+    inputs.treefmt.flakeModule
+  ];
+
   options.perSystem = flake-parts-lib.mkPerSystemOption (
     { config, pkgs, ... }:
     {
