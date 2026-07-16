@@ -50,7 +50,7 @@ in
       };
 
       config.defaults.devShell = pkgs.mkShell {
-        inputsFrom = [ config.pre-commit.devShell ];
+        inputsFrom = lib.optional config.pre-commit.settings.enable config.pre-commit.devShell;
         inherit (config.defaults) packages shellHook;
       };
     }
