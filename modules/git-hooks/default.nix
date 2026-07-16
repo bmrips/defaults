@@ -1,7 +1,10 @@
 { pkgs, ... }:
 
 {
-  ecosystems.yaml.enable = true; # for .convco
+  ecosystems = {
+    toml.enable = true; # for typos.toml
+    yaml.enable = true; # for .convco
+  };
 
   pre-commit.settings = {
     package = pkgs.prek;
