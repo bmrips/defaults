@@ -27,6 +27,7 @@
         { config, ... }:
         {
           devShells.default = config.defaults.devShell;
+          ecosystems.github.enable = true;
         };
     };
 }
